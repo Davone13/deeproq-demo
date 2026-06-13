@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepRoq MVP Telemetry Ingestion Portal</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0f172a; color: #f8fafc; padding: 40px; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .card { background: #1e293b; padding: 40px; border-radius: 16px; border: 1px solid #334155; width: 100%; max-width: 550px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3); }
+        h2 { margin-top: 0; color: #38bdf8; font-size: 24px; display: flex; align-items: center; gap: 10px; }
+        p { color: #94a3b8; font-size: 14px; line-height: 1.5; margin-bottom: 25px; }
+        .form-group { margin-bottom: 20px; display: flex; flex-direction: column; }
+        label { font-weight: 600; margin-bottom: 8px; color: #cbd5e1; font-size: 14px; }
+        input { padding: 12px; background: #0f172a; border: 1px solid #475569; border-radius: 8px; color: white; font-size: 14px; transition: border 0.2s; }
+        input:focus { outline: none; border-color: #38bdf8; }
+        input::placeholder { color: #475569; }
+        button { background-color: #0284c7; color: white; border: none; padding: 14px; font-weight: 600; font-size: 16px; border-radius: 8px; cursor: pointer; width: 100%; transition: background 0.2s; margin-top: 10px; }
+        button:hover { background-color: #0369a1; }
+        #status { margin-top: 20px; font-size: 14px; text-align: center; display: none; padding: 12px; border-radius: 8px; font-weight: 500; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>⚡ DeepRoq Telemetry Portal</h2>
+    <p>Upload raw OTel logs or AI application dumps to simulate real-time, kernel-level eBPF optimization and calculate multi-tenant cloud margin infrastructure savings.</p>
+    
+    <form id="uploadForm" action="https://hook.us2.make.com/c9kputy0q5452d8lwadpu2731yxvlx6r" method="POST" enctype="multipart/form-data">
+        
+        <div class="form-group">
+            <label>User Email</label>
+            <input type="email" name="userEmail" placeholder="partner@shopline.com" required>
+        </div>
+
+        <div class="form-group">
+            <label>User Name</label>
+            <input type="text" name="userName" placeholder="Alex Chen" required>
+        </div>
+
+        <div class="form-group">
+            <label>tenant.id (Merchant Account string)</label>
+            <input type="text" name="tenantId" placeholder="merchant_global_store_44" required>
+        </div>
+
+        <div class="form-group">
+            <label>client.id (SDK Context)</label>
+            <input type="text" name="clientId" placeholder="checkout_pipeline_v1">
+        </div>
+
+        <div class="form-group">
+            <label>X-Request-ID (Correlation ID)</label>
+            <input type="text" name="requestId" placeholder="req-live-demo-100">
+        </div>
+
+        <div class="form-group">
+            <label>Upload Telemetry Data (.txt / .csv)</label>
+            <input type="file" name="logFile" accept=".txt,.csv" required>
+        </div>
+
+        <button type="submit">Deploy File to DeepRoq Pipeline</button>
+    </form>
+    
+    <div id="status"></div>
+</div>
+
+<script>
+    const form = document.getElementById('uploadForm');
+    const statusDiv = document.getElementById('status');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        statusDiv.style.display = 'block';
+        statusDiv.style.backgroundColor = '#334155';
+        statusDiv.style.color = '#e2e8f0';
+        statusDiv.innerText = 'Streaming packet payloads to DeepRoq infrastructure...';
+
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form)
+            });
+
+            if (response.ok) {
+                statusDiv.style.backgroundColor = '#065f46';
+                statusDiv.style.color = '#34d399';
+                statusDiv.innerText = '✅ Ingestion Successful! Metrics compiled in DeepRoq Core.';
+                form.reset();
+            } else {
+                throw new Error();
+            }
+        } catch (error) {
+            statusDiv.style.backgroundColor = '#991b1b';
+            statusDiv.style.color = '#f87171';
+            statusDiv.innerText = '❌ Network Connection Refused. Ensure live receiver pipeline is online.';
+        }
+    });
+</script>
+
+</body>
+</html>
